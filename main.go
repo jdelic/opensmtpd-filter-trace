@@ -19,71 +19,71 @@ func check(n int, err error) {
 }
 
 func (g TraceFilter) Dataline(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) Config(config []string) {
-	check(fmt.Fprintf(log, "%s %s", strings.Join(config, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", strings.Join(config, "|")))
 }
 
 func (g TraceFilter) Commit(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxRollback(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxReset(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxRcpt(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxMail(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxEnvelope(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxData(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxCommit(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) TxBegin(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) LinkTLS(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) LinkDisconnect(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) LinkGreeting(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) LinkIdentity(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) LinkAuth(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 func (g TraceFilter) LinkConnect(session string, params []string) {
-	check(fmt.Fprintf(log, "%s %s", session, strings.Join(params, "|")))
+	check(fmt.Fprintf(log, "%s %s\n", session, strings.Join(params, "|")))
 }
 
 var log *os.File
