@@ -23,7 +23,7 @@ func (g TraceFilter) Dataline(session string, params []string) {
 }
 
 func (g TraceFilter) Config(config []string) {
-	check(fmt.Fprintf(log, "%s %s\n", strings.Join(config, "|")))
+	check(fmt.Fprintf(log, "config %s\n", strings.Join(config, "|")))
 }
 
 func (g TraceFilter) Commit(session string, params []string) {
