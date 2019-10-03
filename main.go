@@ -92,6 +92,6 @@ func main() {
 	log, _ = os.Create("/tmp/filterlog.txt")
 	defer log.Close()
 
-	_, _ = fmt.Fprintf(log, "Tracefilter starting")
+	_, _ = fmt.Fprintf(log, "Tracefilter starting\n")
 	opensmtpd.Run(TraceFilter{})
 }
