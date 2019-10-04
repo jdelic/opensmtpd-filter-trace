@@ -94,7 +94,7 @@ func (g *TraceFilter) LinkConnect(session string, params []string) {
 var log *os.File
 
 func main() {
-	log, _ =  os.OpenFile("/tmp/filterlog.txt", os.O_RDWR|os.O_APPEND, 0660);
+	log, _ =  os.OpenFile("/tmp/filterlog.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0660);
 	defer log.Close()
 
 	_, _ = fmt.Fprintf(log, "Tracefilter starting\n")
