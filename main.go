@@ -27,7 +27,7 @@ func (g *TraceFilter) Dataline(session string, params []string) {
 func (g *TraceFilter) Config(config []string) {
 	_, err := fmt.Fprintf(log, "config %s\n", strings.Join(config, "|"))
 	if err != nil {
-		panic("error " + err.Error())
+		panic("error without check" + err.Error())
 	}
 }
 
@@ -94,7 +94,7 @@ func (g *TraceFilter) LinkConnect(session string, params []string) {
 var log *os.File
 
 func main() {
-	log, _ = os.Create("/tmp/filterlog.txt")
+	log, _ =  os.OpenFile("/tmp/filterlog.txt", os.O_RDWR|os.O_APPEND, 0660);
 	defer log.Close()
 
 	_, _ = fmt.Fprintf(log, "Tracefilter starting\n")
