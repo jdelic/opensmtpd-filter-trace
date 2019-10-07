@@ -14,14 +14,14 @@ type TraceFilter struct {
 
 func check(n int, err error) {
 	if err != nil {
-		log.Fatalf("error %v", err.Error())
+		log.Fatalf("error %d %T %v", n, err, err)
 	}
 }
 
-func (g *TraceFilter) Dataline(session string, params []string) {
-	check(fmt.Fprintf(logfile, "dataline %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) Dataline(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "dataline %v %v\n", sessionId, strings.Join(params, "|")))
 	line := strings.Join(params[1:], "|")
-	fmt.Printf("filter-dataline|%s|%s|%s", params[0], session, line)
+	opensmtpd.DatalineReply(params[0], sessionId, line)
 	logfile.Sync()
 }
 
@@ -30,85 +30,89 @@ func (g *TraceFilter) Config(config []string) {
 	logfile.Sync()
 }
 
-func (g *TraceFilter) Commit(session string, params []string) {
-	check(fmt.Fprintf(logfile, "commit %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) Commit(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "commit %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxRollback(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-rollback %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxRollback(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-rollback %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxReset(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-reset %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxReset(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-reset %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxRcpt(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-rcpt %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxRcpt(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-rcpt %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxMail(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-mail %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxMail(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-mail %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxEnvelope(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-envelope %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxEnvelope(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-envelope %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxData(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-data %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxData(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-data %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxCommit(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-commit %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxCommit(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-commit %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxBegin(session string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-begin %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) TxBegin(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "tx-begin %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkTLS(session string, params []string) {
-	check(fmt.Fprintf(logfile, "link-tls %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) LinkTLS(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "link-tls %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkDisconnect(session string, params []string) {
-	check(fmt.Fprintf(logfile, "link-disconnect %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) LinkDisconnect(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "link-disconnect %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkGreeting(session string, params []string) {
-	check(fmt.Fprintf(logfile, "link-greeting %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) LinkGreeting(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "link-greeting %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkIdentity(session string, params []string) {
-	check(fmt.Fprintf(logfile, "link-identity %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) LinkIdentity(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "link-identity %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkAuth(session string, params []string) {
-	check(fmt.Fprintf(logfile, "link-auth %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) LinkAuth(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "link-auth %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkConnect(session string, params []string) {
-	check(fmt.Fprintf(logfile, "link-connect %v %v\n", session, strings.Join(params, "|")))
+func (g *TraceFilter) LinkConnect(sessionId string, params []string) {
+	check(fmt.Fprintf(logfile, "link-connect %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
 var logfile *os.File
 
 func main() {
-	logfile, _ =  os.OpenFile("/tmp/filterlogfile.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0777);
+	var err error
+	logfile, err = os.OpenFile("/tmp/filterlog.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0777)
+	if err != nil {
+		log.Fatalf("Can't open /tmp/filterlog.txt %v", err)
+	}
 	defer logfile.Close()
 
 	_, _ = fmt.Fprintf(logfile, "Tracefilter starting\n")
