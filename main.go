@@ -32,6 +32,7 @@ func (g *TraceFilter) Config(config []string) {
 
 func (g *TraceFilter) Commit(sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "commit %v %v\n", sessionId, strings.Join(params, "|")))
+	opensmtpd.Proceed(params[0], sessionId)
 	logfile.Sync()
 }
 
