@@ -22,8 +22,8 @@ func (g *TraceFilter) Register() {
 }
 
 func (g *TraceFilter) Dispatch(params []string) {
-	check(fmt.Fprintf(logfile, "INPUT %v", strings.Join(params, "|")))
-	opensmtpd.Dispatch(g, params)	
+	check(fmt.Fprintf(logfile, "INPUT %v\n", strings.Join(params, "|")))
+	opensmtpd.Dispatch(g, params)
 }
 
 func (g *TraceFilter) ProcessConfig(scanner *bufio.Scanner) {
