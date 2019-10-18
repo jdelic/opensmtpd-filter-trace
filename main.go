@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/jdelic/opensmtpd-filters-go"
 	"os"
@@ -12,13 +13,29 @@ import (
 type TraceFilter struct {
 }
 
+func (g *TraceFilter) GetCapabilities() opensmtpd.FilterDispatchMap {
+	return opensmtpd.GetCapabilities(g)
+}
+
+func (g *TraceFilter) Register() {
+	opensmtpd.Register(g)
+}
+
+func (g *TraceFilter) Dispatch(params []string) {
+	opensmtpd.Dispatch(g, params)
+}
+
+func (g *TraceFilter) ProcessConfig(scanner *bufio.Scanner) {
+	opensmtpd.ProcessConfig(g, scanner)
+}
+
 func check(n int, err error) {
 	if err != nil {
 		log.Fatalf("error %d %T %v", n, err, err)
 	}
 }
 
-func (g *TraceFilter) Dataline(sessionId string, params []string) {
+func (g *TraceFilter) Dataline(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "dataline %v %v\n", sessionId, strings.Join(params, "|")))
 	line := strings.Join(params[1:], "|")
 	opensmtpd.DatalineReply(params[0], sessionId, line)
@@ -30,78 +47,78 @@ func (g *TraceFilter) Config(config []string) {
 	logfile.Sync()
 }
 
-func (g *TraceFilter) Commit(sessionId string, params []string) {
+func (g *TraceFilter) Commit(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "commit %v %v\n", sessionId, strings.Join(params, "|")))
 	opensmtpd.Proceed(params[0], sessionId)
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxRollback(sessionId string, params []string) {
+func (g *TraceFilter) TxRollback(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-rollback %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxReset(sessionId string, params []string) {
+func (g *TraceFilter) TxReset(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-reset %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxRcpt(sessionId string, params []string) {
+func (g *TraceFilter) TxRcpt(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-rcpt %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxMail(sessionId string, params []string) {
+func (g *TraceFilter) TxMail(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-mail %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxEnvelope(sessionId string, params []string) {
+func (g *TraceFilter) TxEnvelope(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-envelope %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxData(sessionId string, params []string) {
+func (g *TraceFilter) TxData(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-data %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxCommit(sessionId string, params []string) {
+func (g *TraceFilter) TxCommit(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-commit %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxBegin(sessionId string, params []string) {
+func (g *TraceFilter) TxBegin(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "tx-begin %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkTLS(sessionId string, params []string) {
+func (g *TraceFilter) LinkTLS(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "link-tls %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkDisconnect(sessionId string, params []string) {
+func (g *TraceFilter) LinkDisconnect(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "link-disconnect %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkGreeting(sessionId string, params []string) {
+func (g *TraceFilter) LinkGreeting(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "link-greeting %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkIdentity(sessionId string, params []string) {
+func (g *TraceFilter) LinkIdentity(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "link-identity %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkAuth(sessionId string, params []string) {
+func (g *TraceFilter) LinkAuth(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "link-auth %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkConnect(sessionId string, params []string) {
+func (g *TraceFilter) LinkConnect(verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
 	check(fmt.Fprintf(logfile, "link-connect %v %v\n", sessionId, strings.Join(params, "|")))
 	logfile.Sync()
 }
