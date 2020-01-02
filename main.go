@@ -11,6 +11,10 @@ import (
 
 type TraceFilter struct {}
 
+func (g *TraceFilter) GetName() string {
+	return "Trace filter"
+}
+
 func check(n int, err error) {
 	if err != nil {
 		log.Fatalf("error %d %T %v", n, err, err)
