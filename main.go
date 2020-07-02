@@ -31,173 +31,173 @@ func (g *TraceFilter) Config(config []string) {
 
 /* reporters */
 
-func (g *TraceFilter) LinkConnect(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "link-connect %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) LinkConnect(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "link-connect %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkDisconnect(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "link-disconnect %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) LinkDisconnect(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "link-disconnect %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkGreeting(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "link-greeting %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) LinkGreeting(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "link-greeting %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkIdentify(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "link-identify %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) LinkIdentify(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "link-identify %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkTLS(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "link-tls %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) LinkTLS(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "link-tls %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) LinkAuth(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "link-auth %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) LinkAuth(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "link-auth %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxReset(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-reset %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxReset(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-reset %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxBegin(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-begin %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxBegin(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-begin %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxMail(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-mail %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxMail(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-mail %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxRcpt(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-rcpt %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxRcpt(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-rcpt %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxEnvelope(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-envelope %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxEnvelope(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-envelope %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxData(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-data %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxData(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-data %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxCommit(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-commit %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxCommit(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-commit %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) TxRollback(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "tx-rollback %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) TxRollback(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "tx-rollback %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) ProtocolClient(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "protocol-client %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) ProtocolClient(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "protocol-client %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) ProtocolServer(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "protocol-server %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) ProtocolServer(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "protocol-server %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) FilterReport(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "filter-report %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) FilterReport(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "filter-report %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) FilterResponse(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "filter-response %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) FilterResponse(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "filter-response %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
-func (g *TraceFilter) Timeout(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "timeout %v %v\n", sessionId, strings.Join(params, "|")))
+func (g *TraceFilter) Timeout(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "timeout %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
 	logfile.Sync()
 }
 
 
 /* filters */
 
-func (g *TraceFilter) Connect(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "connect %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Connect(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "connect %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Helo(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "helo %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Helo(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "helo %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Ehlo(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "Ehlo %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Ehlo(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "Ehlo %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) StartTLS(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "starttls %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) StartTLS(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "starttls %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Auth(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "auth %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Auth(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "auth %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) MailFrom(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "mail-from %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) MailFrom(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "mail-from %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) RcptTo(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "rcpt-to %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) RcptTo(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "rcpt-to %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Data(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "data %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Data(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "data %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Dataline(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "dataline %v %v\n", sessionId, strings.Join(params, "|")))
-	line := strings.Join(params[1:], "|")
-	opensmtpd.DatalineReply(params[0], sessionId, line)
+func (g *TraceFilter) Dataline(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "dataline %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	line := strings.Join(ev.GetParams()[1:], "|")
+	ev.Responder().DatalineReply(line)
 }
 
-func (g *TraceFilter) Rset(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "rset %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Rset(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "rset %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Quit(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "noop %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Quit(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "noop %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Help(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "help %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Help(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "help %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Wiz(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "wiz %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Wiz(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "wiz %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
-func (g *TraceFilter) Commit(fw opensmtpd.FilterWrapper, verb string, sh opensmtpd.SessionHolder, sessionId string, params []string) {
-	check(fmt.Fprintf(logfile, "commit %v %v\n", sessionId, strings.Join(params, "|")))
-	opensmtpd.Proceed(params[0], sessionId)
+func (g *TraceFilter) Commit(fw opensmtpd.FilterWrapper, ev opensmtpd.FilterEvent) {
+	check(fmt.Fprintf(logfile, "commit %v %v\n", ev.GetSessionId(), strings.Join(ev.GetAtoms(), "|")))
+	ev.Responder().Proceed()
 }
 
 var logfile *os.File
